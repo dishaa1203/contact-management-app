@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Management App</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Toastify CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+  <!-- Google Sign-In -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <!-- Landing Page -->
+  <div id="landing-page">
+    <h1>📒 Contact Management App</h1>
+    <p>Store, view, and manage all your contacts in one place.</p>
+    <div class="landing-buttons">
+      <button onclick="showSection('login-section')">Login</button>
+      <button onclick="showSection('register-section')">Register</button>
+    </div>
+  </div>
+
+  <!-- Register Form -->
+  <div id="register-section" class="auth-section" style="display:none;">
+    <h2>Create Account</h2>
+    <input type="text" id="regName" placeholder="Username" required>
+    <input type="email" id="regEmail" placeholder="Email" required>
+    <input type="password" id="regPassword" placeholder="Password" required>
+    <button onclick="register()">Register</button>
+    <p>Already have an account? 
+      <a href="#" onclick="showSection('login-section')">Login here</a>
+    </p>
+  </div>
+
+  <!-- Login Form -->
+  <div id="login-section" class="auth-section" style="display:none;">
+    <h2>Login</h2>
+    <input type="email" id="loginEmail" placeholder="Email" required>
+    <input type="password" id="loginPassword" placeholder="Password" required>
+    <button onclick="login()">Login</button>
+
+    <!-- Google Login -->
+    <div id="g_id_onload"
+      data-client_id="YOUR_GOOGLE_CLIENT_ID"
+      data-callback="handleGoogleLogin"
+      data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin" data-type="standard"></div>
+
+    <p>New here? 
+      <a href="#" onclick="showSection('register-section')">Register now</a>
+    </p>
+  </div>
+
+  <!-- Contact Dashboard -->
+  <div id="contact-section" style="display:none;">
+    <div id="user-info">
+      <h2>Welcome, <span id="username"></span> 👋</h2>
+      <p>Email: <span id="useremail"></span></p>
+    </div>
+
+    <!-- Add / Update contact form -->
+    <div class="card">
+      <h3 id="form-title">Add New Contact</h3>
+      <!-- hidden field for editing -->
+      <input type="hidden" id="contactId">
+      <input type="text" id="name" placeholder="Name" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="text" id="contactPhone" placeholder="Phone" required>
+      <button id="submitBtn" onclick="addOrUpdateContact()">Add Contact</button>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="card">
+      <input type="text" id="searchInput" placeholder="🔍 Search contacts..." onkeyup="searchContacts()">
+    </div>
+
+    <!-- Contacts list -->
+    <div class="card">
+      <h3>My Contacts</h3>
+      <ul id="contact-list"></ul>
+    </div>
+
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+
+  <!-- Toastify JS (must come before your script.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+  <!-- Your custom script -->
+  <script src="script.js"></script>
+</body>
+</html>
