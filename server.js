@@ -1,7 +1,6 @@
 // Load environment variables first
 require("dotenv").config();
 
-
 const express = require("express");
 const connectDb = require("./dbConnection");
 const cors = require("cors");
@@ -15,12 +14,13 @@ const app = express();
 const port = process.env.PORT || 5001;
 
 app.use(cors()); // allow all origins
+
 // Connect to MongoDB
 connectDb();
 
 // Middleware to parse JSON bodies
 app.use(express.json());
-const userRoutes = require("./routes/userRoutes");
+
 // Routes
 app.use("/api/contacts", contactRoutes);
 app.use("/api/users", userRoutes);
